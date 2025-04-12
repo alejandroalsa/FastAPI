@@ -1,0 +1,57 @@
+@font-face {
+    font-family: denimInk;
+    src: local("Denim INK WD Regular");
+}
+body{
+    font-family: denimInk;
+}
+nav{
+    background-color: #F04140;
+    height: 10vh;
+}
+
+.nav-item{
+    font-family: denimInk;
+}
+form{
+    font-size: 18px;
+}
+
+#contenido-principal{
+    height: 100vh;
+    padding-top: 10vh;
+}
+
+#contenido-form{
+    background-color: #ef8d8d;
+}
+
+#columna-lateral-izqda{
+    background-color: #ef8d8d;
+}
+
+.btn-check:checked+.btn{
+    background-color: #F04140;
+}
+.btn-group-vertical .btn{
+    background-color: #FFFFFF;
+}
+#contenido-central{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.card{
+    background-color: #ef8d8d;
+}
+
+.card-body{
+    background-color: #ffffff;
+}
+
+.card-text{
+    font-family: denimInk;
+    font-size: 18px;
+}
