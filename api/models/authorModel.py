@@ -13,8 +13,6 @@ from sqlalchemy.orm import Mapped, relationship, mapped_column
 # podcast_authors: Es la tabla intermedia, usada para la relación muchos a muchos (many-to-many) entre Podcast y Author.
 from api import Base, podcast_authors
 
-# Podcast: El modelo Podcast que se importa para poder establecer la relación.
-from api.models.podcastModel import Podcast
 
 # Definición de la clase Author
 class Author(Base):
