@@ -9,6 +9,11 @@ DeclarativeBase: Definir una base declaravita para los modelos
 """
 from sqlalchemy import Column, ForeignKey, Table, create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 
 # URL de conexión a la base de datos, en este caso para MySQL
 """
@@ -17,8 +22,11 @@ password_admin: contraseña del usuario
 localhost: servidor de la base de datos
 masterpodcast: nombre de la base de datos
 """
+
 SQLALCHEMY_DATABASE_URL = (
-  "mysql+pymysql://diwesadvanced_admin:password_admin@localhost/masterpodcast"
+    f"{os.getenv('DB_CONNECTION')}+pymysql://{os.getenv('DB_USERNAME')}:"
+    f"{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/"
+    f"{os.getenv('DB_DATABASE')}"
 )
 
 # Creación del objeto "engine" que representa la conexión a la base de datos.

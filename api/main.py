@@ -8,6 +8,11 @@ from api import authorsRouter
 from sqlalchemy.orm import Session
 from api import get_db, securityController
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 from fastapi.security import OAuth2PasswordBearer
 from datetime import timedelta
 
@@ -31,10 +36,10 @@ origins = [
 
 # Instancia de la aplicación FastAPI, que será el núcleo de la API.
 app = FastAPI(
-    title="Mastermaind Podcast API",
-    description="APIRestFul para la gestión de los podcast realizados por Mastermind",
-    version="0.1",
-    contact={"name": "alejandroalsa", "url": "https://www.alejandroalsa.es"},
+    title=os.getenv('API_NAME'),
+    description=os.getenv('API_DESCRIPTION'),
+    version=os.getenv('API_VERSION'),
+    contact={"name": os.getenv('API_DEVELOPER'), "url": "https://www.alejandroalsa.es", "email": os.getenv('EMAIL_SUPPORT')},
     openapi_tags=tags_metadata,  # Organiza las rutas por grupos con etiquetas amigables para la doc.
 )
 

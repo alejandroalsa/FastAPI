@@ -14,8 +14,10 @@ from api import UserModel, UserCreateSchema, get_db
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="signin/")
 
-SECRET_KEY = "60423e1270dc9b60392eb3c02ec9ba47e121283a1fd6d14ad78f8ab27256e937"
-ALGORITHM = "HS256"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Carga las variables del archivo .env
 
 def get_user(db: Session, username: str):
   return db.query(UserModel).filter(UserModel.username == username).first() 
@@ -39,7 +41,7 @@ def check_token(token: Annotated[str, Depends(oauth2_scheme)], db: Session = Dep
     # Comprobación de usuario en DB
     # No es un sistema de token seguro, solo de implementacion de oAuth2
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, os.getenv("SECRET_KEY"), algorithms=[os.getenv("ALGORITHM")])
         username: str = payload.get("sub")
         if username is None:
             raise HTTPException(
@@ -71,5 +73,5 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     else:
         expire = datetime.now(timezone.utc) + timedelta(minutes=15)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, os.getenv("SECRET_KEY"), algorithm=os.getenv("ALGORITHM"))
     return encoded_jwt
