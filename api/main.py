@@ -67,8 +67,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 async def root():
     return {"title": app.title, "version": app.version}
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 @app.post("/signup/", response_model=UserSchema)
 async def singup(user: UserCreateSchema, db: Session = Depends(get_db)):
     user.password=pwd_context.hash(user.password)
