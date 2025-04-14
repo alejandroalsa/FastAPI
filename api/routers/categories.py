@@ -4,6 +4,8 @@ from api import categoryController, get_db
 from api import CategorySchema
 from api import CategoryCreateSchema
 from api import CategoryPodcastsSchema
+from api.controllers import securityController
+from api.schemas.usersSchema import UserSchema
 
 # Enrutador donde definiremos los endpoints
 
@@ -45,7 +47,9 @@ async def update_categories(category_id:int, category:CategoryCreateSchema, db: 
   return categoryResult
 
 @router.delete("/{category_id}", response_model=list[CategorySchema])
-async def delete_category(category_id: int, db: Session = Depends(get_db)):
+async def delete_category(category_id: int, db: Session = Depends(get_db),
+user: UserSchema = Depends(securityController.check_token)):
+
     categories = categoryController.delete_category(db, category_id)
     if categories == None:
         raise HTTPException(status_code=404, detail="Category not found")
