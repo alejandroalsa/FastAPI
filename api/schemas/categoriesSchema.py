@@ -35,6 +35,3 @@ class CategoryPodcastsSchema(CategoryBase):
 
     # Esta configuración indica a Pydantic que mapee los atributos del modelo (en lugar de los campos definidos en el esquema) a los atributos de los objetos.
     model_config = ConfigDict(from_attributes=True)
-
-
-
